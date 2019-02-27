@@ -1,10 +1,24 @@
 <template>
   <div id="app">
-    <left-screen :people="people" @clickedPerson="showDrawer($event, 'left')"></left-screen>
-    <left-screen-drawer :drawerContent="drawerContent" ref="leftScreenDrawer"></left-screen-drawer>
+    <left-screen
+      :people="people"
+      @clickedPerson="showDrawer($event, 'left')"
+      @currentSlide="left = $event">
+    </left-screen>
+    <left-screen-drawer
+      :drawerContent="drawerContent"
+      ref="leftScreenDrawer">
+    </left-screen-drawer>
 
-    <right-screen :people="people" @clickedPerson="showDrawer($event, 'right')"></right-screen>
-    <right-screen-drawer :drawerContent="drawerContent" ref="rightScreenDrawer"></right-screen-drawer>
+    <right-screen
+      :people="people"
+      @clickedPerson="showDrawer($event, 'right')"
+      @currentSlide="right = $event">
+    </right-screen>
+    <right-screen-drawer
+      :drawerContent="drawerContent"
+      ref="rightScreenDrawer">
+    </right-screen-drawer>
   </div>
 </template>
 
@@ -20,8 +34,8 @@ export default {
   components: { leftScreen, leftScreenDrawer, rightScreen, rightScreenDrawer },
   data () {
     return {
-      left: '',
-      right: '',
+      left: 0,
+      right: 1,
       drawerContent: {},
       people: [
         {

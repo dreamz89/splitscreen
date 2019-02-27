@@ -1,6 +1,6 @@
 <template>
   <div id="left">
-    <slider ref="slider" :options="options">
+    <slider ref="slider" :options="options" @slide='slide'>
       <slideritem
         class="person"
         v-for="(person, index) in people"
@@ -43,11 +43,14 @@ export default {
     fullHeight () {
       return window.innerHeight + 'px'
     },
-    slide () {
+    slidePre () {
       this.$refs.slider.$emit('slidePre')
     },
     slideNext () {
       this.$refs.slider.$emit('slideNext')
+    },
+    slide (data) {
+      this.$emit('currentSlide', data.currentPage)
     },
     handleScroll (e) {
       e.preventDefault()
@@ -65,7 +68,7 @@ export default {
           this.slideNext()
           this.fire = false
         } else {
-          this.slide()
+          this.slidePre()
           this.fire = false
         }
       }
