@@ -1,47 +1,49 @@
 <template>
   <div id="app">
-    <left-screen
+    <side-screen
       :people="people"
+      :side="'left'"
+      :currentPage="0"
       @clickedPerson="showDrawer($event, 'left')"
       @currentSlide="left = $event">
-    </left-screen>
-    <left-screen-drawer
+    </side-screen>
+    <side-drawer
       :drawerContent="drawerContent"
+      class="left"
       ref="leftScreenDrawer">
-    </left-screen-drawer>
+    </side-drawer>
 
-    <right-screen
+    <side-screen
       :people="people"
+      :side="'right'"
+      :currentPage="1"
       @clickedPerson="showDrawer($event, 'right')"
       @currentSlide="right = $event">
-    </right-screen>
-    <right-screen-drawer
+    </side-screen>
+    <side-drawer
       :drawerContent="drawerContent"
+      class="right"
       ref="rightScreenDrawer">
-    </right-screen-drawer>
+    </side-drawer>
 
     <div class="combo" @click="showMixDrawer">
       <p>Mix</p>
     </div>
-    <mix-drawer
+    <side-drawer
       :drawerContent="mixContent"
+      class="mix"
       ref="mixDrawer">
-    </mix-drawer>
+    </side-drawer>
   </div>
 </template>
 
 <script>
-import leftScreen from './components/LeftScreen.vue'
-import leftScreenDrawer from './components/LeftScreenDrawer.vue'
-
-import rightScreen from './components/RightScreen.vue'
-import rightScreenDrawer from './components/RightScreenDrawer.vue'
-
-import mixDrawer from './components/MixDrawer.vue'
+import sideScreen from './components/SideScreen.vue'
+import sideDrawer from './components/SideDrawer.vue'
 
 export default {
   name: 'app',
-  components: { leftScreen, leftScreenDrawer, rightScreen, rightScreenDrawer, mixDrawer },
+  components: { sideScreen, sideDrawer },
   data () {
     return {
       left: 0,
@@ -124,7 +126,7 @@ export default {
         name: name1 + ' and ' + name2,
         description: this.relation[name1 + ' ' + name2] || this.relation[name2 + ' ' + name1]
       }
-      this.$refs.mixDrawer.$el.classList.add('slideIn')
+      this.$refs.mixDrawer.$el.classList.add('slideDown')
     }
   }
 }

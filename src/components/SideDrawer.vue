@@ -12,10 +12,23 @@
 
 <script>
 export default {
-  props: ['drawerContent'],
+  props: {
+    drawerContent: {
+      type: Object,
+      required: true,
+      default: function() {
+        return {
+          name: '',
+          color: '',
+          description: ''
+        }
+      }
+    }
+  },
   methods: {
     hideDrawer () {
       this.$refs.drawer.classList.remove('slideIn')
+      this.$refs.drawer.classList.remove('slideDown')
     }
   }
 }
@@ -24,17 +37,31 @@ export default {
 <style lang="scss" scoped>
 .drawer {
   height: 100%;
-  width: 100%;
+  width: 50%;
   position: absolute;
   top: 0;
-  left: 0;
   z-index: 2;
   background-color: white;
-  transform: translateY(-100%);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 1s;
+
+  &.left {
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  &.right {
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  &.mix {
+    width: 100%;
+    left: 0;
+    transform: translateY(-100%);
+  }
 
   .content {
     padding: 20px;
@@ -58,6 +85,10 @@ export default {
   }
 
   &.slideIn {
+    transform: translateX(0);
+  }
+
+  &.slideDown {
     transform: translateY(0);
   }
 }

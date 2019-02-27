@@ -1,5 +1,5 @@
 <template>
-  <div id="left">
+  <div class="side">
     <slider ref="slider" :options="options" @slide='slide'>
       <slideritem
         class="person"
@@ -7,7 +7,7 @@
         :key="index"
         :style="{ backgroundColor: person.color, height: fullHeight() }">
         <div class="name" @click="$emit('clickedPerson', person)">
-          ← {{ person.name }}
+          {{ side === 'left' ? person.name + ' →' : '← ' + person.name }}
         </div>
       </slideritem>
     </slider>
@@ -18,7 +18,7 @@
 import { slider, slideritem } from 'vue-concise-slider' // https://warpcgd.github.io/vue-concise-slider/
 
 export default {
-  props: ['people'],
+  props: ['people', 'currentPage', 'side'],
   components: { slider, slideritem },
   data() {
     return {
@@ -27,7 +27,7 @@ export default {
       options: {
         direction: 'vertical',
         slidesToScroll: 1,
-        currentPage: 0,
+        currentPage: this.currentPage,
         loop: true,
         pagination: false
       }
@@ -78,7 +78,7 @@ export default {
 </script>
 
 <style lang="scss">
-#left {
+.side {
   display: inline-block;
   width: 50%;
   vertical-align: top;
