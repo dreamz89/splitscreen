@@ -46,6 +46,7 @@ export default {
     return {
       left: 0,
       right: 1,
+      drawerIsOpen: false,
       drawerContent: {},
       mixContent: {},
       people: [
@@ -107,8 +108,14 @@ export default {
   },
   methods: {
     showDrawer (person, side) {
-      this.drawerContent = person
-      this.$refs[side + 'ScreenDrawer'].$el.classList.add('slideIn')
+      if (this.drawerIsOpen) {
+        this.$refs[side + 'ScreenDrawer'].$el.classList.remove('slideIn')
+        this.drawerIsOpen = false
+      } else {
+        this.drawerContent = person
+        this.$refs[side + 'ScreenDrawer'].$el.classList.add('slideIn')
+        this.drawerIsOpen = true
+      }
     },
     showMixDrawer () {
       const name1 = this.people[this.left].name
@@ -145,6 +152,10 @@ html, body {
     border-radius: 50%;
     text-align: center;
     cursor: pointer;
+
+    &:hover {
+      background-color: #404040;
+    }
 
     p {
       font-size: 20px;
