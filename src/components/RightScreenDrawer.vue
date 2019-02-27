@@ -39,10 +39,10 @@ export default {
   width: 50%;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 2;
   background-color: white;
-  transform: translateX(100%);
+  transform: translateX(-100%);
   display: flex;
   align-items: center;
   justify-content: center;

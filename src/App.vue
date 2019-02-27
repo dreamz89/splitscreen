@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <left-screen :people="people" @clickedPerson="showDrawer($event)"></left-screen>
+    <left-screen :people="people" @clickedPerson="showDrawer($event, 'left')"></left-screen>
     <left-screen-drawer :drawerContent="drawerContent" ref="leftScreenDrawer"></left-screen-drawer>
 
-    <right-screen :people="people"></right-screen>
+    <right-screen :people="people" @clickedPerson="showDrawer($event, 'right')"></right-screen>
+    <right-screen-drawer :drawerContent="drawerContent" ref="rightScreenDrawer"></right-screen-drawer>
   </div>
 </template>
 
@@ -12,10 +13,11 @@ import leftScreen from './components/LeftScreen.vue'
 import leftScreenDrawer from './components/LeftScreenDrawer.vue'
 
 import rightScreen from './components/RightScreen.vue'
+import rightScreenDrawer from './components/RightScreenDrawer.vue'
 
 export default {
   name: 'app',
-  components: { leftScreen, leftScreenDrawer, rightScreen },
+  components: { leftScreen, leftScreenDrawer, rightScreen, rightScreenDrawer },
   data () {
     return {
       left: '',
@@ -78,9 +80,9 @@ export default {
     }
   },
   methods: {
-    showDrawer(person) {
+    showDrawer(person, side) {
       this.drawerContent = person
-      this.$refs.leftScreenDrawer.$el.classList.add('slideIn')
+      this.$refs[side + 'ScreenDrawer'].$el.classList.add('slideIn')
     }
   }
 }
