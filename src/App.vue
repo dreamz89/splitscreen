@@ -19,7 +19,7 @@ export default {
       people: [
         {
           name: 'YongJun',
-          color: '#001f3f',
+          color: '#DDDDDD',
           description: 'Senior Web Developer'
         },
         {

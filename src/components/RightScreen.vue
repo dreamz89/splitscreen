@@ -14,5 +14,6 @@ export default {
   display: inline-block;
   height: 100%;
   width: 50%;
+  background-color: beige
 }
 </style>
