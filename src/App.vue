@@ -1,21 +1,26 @@
 <template>
   <div id="app">
-    <left-screen :people="people"></left-screen>
+    <left-screen :people="people" @clickedPerson="showDrawer($event)"></left-screen>
+    <left-screen-drawer :drawerContent="drawerContent" ref="leftScreenDrawer"></left-screen-drawer>
+
     <right-screen :people="people"></right-screen>
   </div>
 </template>
 
 <script>
-import LeftScreen from './components/LeftScreen.vue'
-import RightScreen from './components/RightScreen.vue'
+import leftScreen from './components/LeftScreen.vue'
+import leftScreenDrawer from './components/LeftScreenDrawer.vue'
+
+import rightScreen from './components/RightScreen.vue'
 
 export default {
   name: 'app',
-  components: { LeftScreen, RightScreen },
+  components: { leftScreen, leftScreenDrawer, rightScreen },
   data () {
     return {
       left: '',
       right: '',
+      drawerContent: {},
       people: [
         {
           name: 'YongJun',
@@ -70,6 +75,12 @@ export default {
           description: 'Unfortunately separated by someone in between them.'
         }
       ]
+    }
+  },
+  methods: {
+    showDrawer(person) {
+      this.drawerContent = person
+      this.$refs.leftScreenDrawer.$el.classList.add('slideIn')
     }
   }
 }

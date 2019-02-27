@@ -6,7 +6,7 @@
         v-for="(person, index) in people"
         :key="index"
         :style="{ backgroundColor: person.color, height: fullHeight() }">
-        <div class="name">
+        <div class="name" @click="$emit('clickedPerson', person)">
           ← {{ person.name }}
         </div>
       </slideritem>
@@ -69,7 +69,7 @@ export default {
           this.fire = false
         }
       }
-    }
+    },
   }
 }
 </script>
@@ -85,6 +85,7 @@ export default {
 
     .name {
       font-size: 20px;
+      cursor: pointer;
     }
   }
 }
