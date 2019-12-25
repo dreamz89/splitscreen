@@ -31,24 +31,24 @@
     <div class="combo" ref="combo" @click="toggleMixDrawer">
       <p>Mix</p>
     </div>
-    <side-drawer
+    <full-drawer
       :drawerContent="mixContent"
-      class="mix"
       ref="mixDrawer"
       @chosen="toggleMixDrawer"
-    ></side-drawer>
+    ></full-drawer>
   </div>
 </template>
 
 <script>
 import sideScreen from './components/SideScreen.vue'
 import sideDrawer from './components/SideDrawer.vue'
+import fullDrawer from './components/FullDrawer.vue'
 import people from './data/people.json'
 import relation from './data/relation.json'
 
 export default {
   name: 'app',
-  components: { sideScreen, sideDrawer },
+  components: { sideScreen, sideDrawer, fullDrawer },
   data () {
     return {
       people,
@@ -78,10 +78,7 @@ export default {
       } else {
         const name1 = this.people[this.left].name
         const name2 = this.people[this.right].name
-        this.mixContent = {
-          name: name1 + ' and ' + name2,
-          description: this.relation[name1 + ' ' + name2] || this.relation[name2 + ' ' + name1]
-        }
+        this.mixContent = this.relation[name1 + ' ' + name2] || this.relation[name2 + ' ' + name1]
         this.$refs.mixDrawer.$el.classList.add('slideDown')
       }
 

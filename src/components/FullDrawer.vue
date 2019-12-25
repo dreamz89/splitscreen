@@ -1,7 +1,6 @@
 <template>
   <div class="drawer">
     <div class="content">
-      <h1>{{ drawerContent.name }}</h1>
       <p>{{ drawerContent.description }}</p>
     </div>
     <div class="close" @click="$emit('chosen')">
@@ -18,8 +17,6 @@ export default {
       required: true,
       default: function() {
         return {
-          name: '',
-          color: '',
           description: ''
         }
       }
@@ -31,25 +28,17 @@ export default {
 <style lang="scss" scoped>
 .drawer {
   height: 100%;
-  width: 50%;
+  width: 100%;
   position: absolute;
   top: 0;
+  left: 0;
+  transform: translateY(-100%);
   z-index: 2;
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 1s;
-
-  &.left {
-    right: 0;
-    transform: translateX(100%);
-  }
-
-  &.right {
-    left: 0;
-    transform: translateX(-100%);
-  }
 
   .content {
     padding: 20px;
@@ -72,8 +61,8 @@ export default {
     cursor: pointer;
   }
 
-  &.slideIn {
-    transform: translateX(0);
+  &.slideDown {
+    transform: translateY(0);
   }
 }
 </style>
