@@ -6,7 +6,7 @@
         v-for="(person, index) in people"
         :key="index"
         :style="{ backgroundColor: person.color, height: fullHeight() }">
-        <div class="name" @click="$emit('clickedPerson', person)">
+        <div class="name" @click="$emit('chosen', person)">
           {{ side === 'left' ? person.name + ' →' : '← ' + person.name }}
         </div>
       </slideritem>

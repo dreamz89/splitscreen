@@ -4,7 +4,7 @@
       <h1>{{ drawerContent.name }}</h1>
       <p>{{ drawerContent.description }}</p>
     </div>
-    <div class="close" @click="hideDrawer">
+    <div class="close" @click="$emit('chosen')">
       X
     </div>
   </div>
@@ -23,12 +23,6 @@ export default {
           description: ''
         }
       }
-    }
-  },
-  methods: {
-    hideDrawer () {
-      this.$refs.drawer.classList.remove('slideIn')
-      this.$refs.drawer.classList.remove('slideDown')
     }
   }
 }

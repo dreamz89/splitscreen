@@ -4,129 +4,88 @@
       :people="people"
       :side="'left'"
       :currentPage="0"
-      @clickedPerson="showDrawer($event, 'left')"
-      @currentSlide="left = $event">
-    </side-screen>
+      @chosen="toggleDrawer($event, 'left')"
+      @currentSlide="left = $event"
+    ></side-screen>
     <side-drawer
       :drawerContent="drawerContent"
       class="left"
-      ref="leftScreenDrawer">
-    </side-drawer>
+      ref="leftDrawer"
+      @chosen="toggleDrawer($event, 'left')"
+    ></side-drawer>
 
     <side-screen
       :people="people"
       :side="'right'"
       :currentPage="1"
-      @clickedPerson="showDrawer($event, 'right')"
-      @currentSlide="right = $event">
-    </side-screen>
+      @chosen="toggleDrawer($event, 'right')"
+      @currentSlide="right = $event"
+    ></side-screen>
     <side-drawer
       :drawerContent="drawerContent"
       class="right"
-      ref="rightScreenDrawer">
-    </side-drawer>
+      ref="rightDrawer"
+      @chosen="toggleDrawer($event, 'right')"
+    ></side-drawer>
 
-    <div class="combo" @click="showMixDrawer">
+    <div class="combo" ref="combo" @click="toggleMixDrawer">
       <p>Mix</p>
     </div>
     <side-drawer
       :drawerContent="mixContent"
       class="mix"
-      ref="mixDrawer">
-    </side-drawer>
+      ref="mixDrawer"
+      @chosen="toggleMixDrawer"
+    ></side-drawer>
   </div>
 </template>
 
 <script>
 import sideScreen from './components/SideScreen.vue'
 import sideDrawer from './components/SideDrawer.vue'
+import people from './data/people.json'
+import relation from './data/relation.json'
 
 export default {
   name: 'app',
   components: { sideScreen, sideDrawer },
   data () {
     return {
+      people,
+      relation,
       left: 0,
       right: 1,
       drawerIsOpen: false,
       drawerContent: {},
-      mixContent: {},
-      people: [
-        {
-          name: 'YongJun',
-          color: '#DDDDDD',
-          description: 'Senior Web Developer'
-        },
-        {
-          name: 'Weixian',
-          color: '#0074D9',
-          description: 'AR and VR Specialist'
-        },
-        {
-          name: 'MayLinn',
-          color: '#7FDBFF',
-          description: 'Drupal girl'
-        },
-        {
-          name: 'Charles',
-          color: '#2ECC40',
-          description: 'Jimmy Neutron brought to life'
-        },
-        {
-          name: 'Jocelyn',
-          color: '#39CCCC',
-          description: 'Free-spirited Junior'
-        },
-        {
-          name: 'Sujin',
-          color: '#FFDC00',
-          description: 'Singapore Streets Expert'
-        }
-      ],
-      relation: {
-        'YongJun YongJun': 'Himself',
-        'YongJun Weixian': 'Together they build up the code architecture for the team.',
-        'YongJun MayLinn': 'Usually in discussions over premium stuff.',
-        'YongJun Charles': 'Not yet collaborated.',
-        'YongJun Jocelyn': 'The Vue Master and his young padawan.',
-        'YongJun Sujin': 'Unfortunately separated by someone in between them.',
-        'Weixian Weixian': 'Herself',
-        'Weixian MayLinn': 'Best buddies',
-        'Weixian Charles': 'Neighbours',
-        'Weixian Jocelyn': 'Teammates',
-        'Weixian Sujin': 'Teammates',
-        'MayLinn MayLinn': 'Herself',
-        'MayLinn Charles': 'Two ends of a row',
-        'MayLinn Jocelyn': 'Initially trainer and trainee',
-        'MayLinn Sujin': 'Workshop buddies',
-        'Charles Charles': 'Himself',
-        'Charles Jocelyn': 'Lunch mates',
-        'Charles Sujin': 'Teammates',
-        'Jocelyn Jocelyn': 'Herself',
-        'Jocelyn Sujin': 'Neighbours',
-        'Sujin Sujin': 'Herself'
-      }
+      mixContent: {}
     }
   },
   methods: {
-    showDrawer (person, side) {
+    toggleDrawer (person, side) {
       if (this.drawerIsOpen) {
-        this.$refs[side + 'ScreenDrawer'].$el.classList.remove('slideIn')
-        this.drawerIsOpen = false
+        this.$refs[side + 'Drawer'].$el.classList.remove('slideIn')
       } else {
         this.drawerContent = person
-        this.$refs[side + 'ScreenDrawer'].$el.classList.add('slideIn')
-        this.drawerIsOpen = true
+        this.$refs[side + 'Drawer'].$el.classList.add('slideIn')
       }
+
+      this.drawerIsOpen = !this.drawerIsOpen
+      this.$refs.combo.classList.toggle('disabled')
     },
-    showMixDrawer () {
-      const name1 = this.people[this.left].name
-      const name2 = this.people[this.right].name
-      this.mixContent = {
-        name: name1 + ' and ' + name2,
-        description: this.relation[name1 + ' ' + name2] || this.relation[name2 + ' ' + name1]
+    toggleMixDrawer () {
+      if (this.drawerIsOpen) {
+        this.$refs.mixDrawer.$el.classList.remove('slideDown')
+      } else {
+        const name1 = this.people[this.left].name
+        const name2 = this.people[this.right].name
+        this.mixContent = {
+          name: name1 + ' and ' + name2,
+          description: this.relation[name1 + ' ' + name2] || this.relation[name2 + ' ' + name1]
+        }
+        this.$refs.mixDrawer.$el.classList.add('slideDown')
       }
-      this.$refs.mixDrawer.$el.classList.add('slideDown')
+
+      this.drawerIsOpen = !this.drawerIsOpen
     }
   }
 }
@@ -147,7 +106,7 @@ html, body {
     bottom: -100px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 2;
+    z-index: 3;
     height: 200px;
     width: 200px;
     background-color: #333;
@@ -157,6 +116,11 @@ html, body {
 
     &:hover {
       background-color: #404040;
+    }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.8;
     }
 
     p {
