@@ -1,7 +1,12 @@
 # split-screen
 
 Reference: https://trendmixer.eu/
-The relationship between different people in a team.
+How mixes of some dog breeds look like
+
+### Challenges
+Slider plugin does not cater for laptop touchpad -> added handleScroll function
+Background image showing good image position responsively
+Differentiating between click and drag on slider
 
 ## Project setup
 ```

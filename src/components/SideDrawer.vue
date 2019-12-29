@@ -1,7 +1,7 @@
 <template>
   <div class="drawer">
     <div class="content">
-      <h1>{{ drawerContent.name }}</h1>
+      <h1>{{ drawerContent.breed }}</h1>
       <p>{{ drawerContent.description }}</p>
     </div>
     <div class="close" @click="$emit('chosen')">
@@ -18,8 +18,7 @@ export default {
       required: true,
       default: function() {
         return {
-          name: '',
-          color: '',
+          breed: '',
           description: ''
         }
       }

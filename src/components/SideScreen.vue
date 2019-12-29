@@ -2,13 +2,17 @@
   <div class="side">
     <slider ref="slider" :options="options" @slide='slide'>
       <slideritem
-        class="person"
-        v-for="(person, index) in people"
+        v-for="(breed, index) in breeds"
         :key="index"
-        :style="{ backgroundColor: person.color, height: fullHeight() }">
-        <div class="name" @click="$emit('chosen', person)">
-          {{ side === 'left' ? person.name + ' →' : '← ' + person.name }}
-        </div>
+        :style="{
+          backgroundImage: 'url(' + require('@/assets/' + breed.image) + ')',
+          height: fullHeight()
+        }">
+        <div class="overlay"
+          @wheel="handleScroll"
+          @mousedown="handleDown"
+          @mouseup="handleUp($event, breed)"
+        ></div>
       </slideritem>
     </slider>
   </div>
@@ -18,11 +22,13 @@
 import { slider, slideritem } from 'vue-concise-slider' // https://warpcgd.github.io/vue-concise-slider/
 
 export default {
-  props: ['people', 'currentPage', 'side'],
+  props: ['breeds', 'currentPage', 'side'],
   components: { slider, slideritem },
   data() {
     return {
-      fire: true,
+      scrollable: true,
+      initialPosition: null,
+      finalPosition: null,
       timer: null,
       options: {
         direction: 'vertical',
@@ -32,12 +38,6 @@ export default {
         pagination: false
       }
     }
-  },
-  mounted () {
-    this.$refs.slider.$el.addEventListener('wheel', this.handleScroll)
-  },
-  destroyed () {
-    this.$refs.slider.$el.removeEventListener('wheel', this.handleScroll)
   },
   methods: {
     fullHeight () {
@@ -60,19 +60,27 @@ export default {
       }
 
       this.timer = setTimeout(() => {
-        this.fire = true
+        this.scrollable = true
       }, 50)
 
-      if (this.fire) {
+      if (this.scrollable) {
         if (e.deltaY < 0) {
           this.slideNext()
-          this.fire = false
+          this.scrollable = false
         } else {
           this.slidePre()
-          this.fire = false
+          this.scrollable = false
         }
       }
     },
+    handleDown (e) {
+      this.initialPosition = e.pageX + e.pageY
+    },
+    handleUp (e, breed) {
+      const finalPosition = e.pageX + e.pageY
+      const difference = finalPosition - this.initialPosition
+      if (Math.abs(difference) < 10) this.$emit('chosen', breed)
+    }
   }
 }
 </script>
@@ -83,11 +91,13 @@ export default {
   width: 50%;
   vertical-align: top;
 
-  .person {
-    overflow: auto;
+  .slider-item {
+    background-size: cover;
+    background-repeat: no-repeat;
 
-    .name {
-      font-size: 20px;
+    .overlay {
+      height: 100%;
+      width: 100%;
       cursor: pointer;
     }
   }

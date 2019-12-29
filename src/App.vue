@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <side-screen
-      :people="people"
+      :breeds="breeds"
       :side="'left'"
       :currentPage="0"
       @chosen="toggleDrawer($event, 'left')"
@@ -15,7 +15,7 @@
     ></side-drawer>
 
     <side-screen
-      :people="people"
+      :breeds="breeds"
       :side="'right'"
       :currentPage="1"
       @chosen="toggleDrawer($event, 'right')"
@@ -43,15 +43,15 @@
 import sideScreen from './components/SideScreen.vue'
 import sideDrawer from './components/SideDrawer.vue'
 import fullDrawer from './components/FullDrawer.vue'
-import people from './data/people.json'
 import relation from './data/relation.json'
+import breeds from './data/breeds.json'
 
 export default {
   name: 'app',
   components: { sideScreen, sideDrawer, fullDrawer },
   data () {
     return {
-      people,
+      breeds,
       relation,
       left: 0,
       right: 1,
@@ -61,11 +61,11 @@ export default {
     }
   },
   methods: {
-    toggleDrawer (person, side) {
+    toggleDrawer (breed, side) {
       if (this.drawerIsOpen) {
         this.$refs[side + 'Drawer'].$el.classList.remove('slideIn')
       } else {
-        this.drawerContent = person
+        this.drawerContent = breed
         this.$refs[side + 'Drawer'].$el.classList.add('slideIn')
       }
 
@@ -76,8 +76,8 @@ export default {
       if (this.drawerIsOpen) {
         this.$refs.mixDrawer.$el.classList.remove('slideDown')
       } else {
-        const name1 = this.people[this.left].name
-        const name2 = this.people[this.right].name
+        const name1 = this.breeds[this.left].name
+        const name2 = this.breeds[this.right].name
         this.mixContent = this.relation[name1 + ' ' + name2] || this.relation[name2 + ' ' + name1]
         this.$refs.mixDrawer.$el.classList.add('slideDown')
       }
@@ -116,8 +116,9 @@ html, body {
     }
 
     &.disabled {
-      pointer-events: none;
-      opacity: 0.8;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s;
     }
 
     p {
