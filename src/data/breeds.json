@@ -1,17 +1,66 @@
 [
   {
     "breed": "Corgi",
-    "image": "parent/corgi1.jpg",
+    "desktopImage": "parent/corgi.jpg",
+    "desktopPosition": "60%",
+    "mobileImage": "parent/corgi-mobile.jpg",
+    "mobilePosition": "45%",
     "description": ""
   },
   {
-    "breed": "Corgi",
-    "image": "parent/corgi1.jpg",
+    "breed": "Chow Chow",
+    "desktopImage": "parent/chow.jpg",
+    "desktopPosition": "25%",
+    "mobileImage": "parent/chow-mobile.jpg",
+    "mobilePosition": "25%",
     "description": ""
   },
   {
-    "breed": "Corgi",
-    "image": "parent/corgi1.jpg",
+    "breed": "Border Collie",
+    "desktopImage": "parent/collie.jpg",
+    "desktopPosition": "60%",
+    "mobileImage": "parent/collie-mobile.jpg",
+    "mobilePosition": "45%",
+    "description": ""
+  },
+  {
+    "breed": "German Shepherd",
+    "desktopImage": "parent/german.jpg",
+    "desktopPosition": "55%",
+    "mobileImage": "parent/german-mobile.jpg",
+    "mobilePosition": "45%",
+    "description": ""
+  },
+  {
+    "breed": "Golden Retriever",
+    "desktopImage": "parent/golden.jpg",
+    "desktopPosition": "55%",
+    "mobileImage": "parent/golden-mobile.jpg",
+    "mobilePosition": "37%",
+    "description": ""
+  },
+  {
+    "breed": "Husky",
+    "desktopImage": "parent/husky.jpg",
+    "desktopPosition": "0%",
+    "mobileImage": "parent/husky-mobile.jpg",
+    "mobilePosition": "42%",
+    "description": ""
+  },
+  {
+    "breed": "Pomeranian",
+    "desktopImage": "parent/pom.jpg",
+    "desktopPosition": "0%",
+    "mobileImage": "parent/pom-mobile.jpg",
+    "mobilePosition": "42%",
+    "description": ""
+  },
+  {
+    "breed": "Poodle",
+    "desktopImage": "parent/poodle.jpg",
+    "desktopPosition": "50%",
+    "mobileImage": "parent/poodle-mobile.jpg",
+    "mobilePosition": "40%",
     "description": ""
   }
 ]

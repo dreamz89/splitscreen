@@ -5,8 +5,9 @@
         v-for="(breed, index) in breeds"
         :key="index"
         :style="{
-          backgroundImage: 'url(' + require('@/assets/' + breed.image) + ')',
-          height: fullHeight()
+          height: fullHeight(),
+          backgroundImage: getBackgroundImage(breed),
+          backgroundPosition: mobilePosition(breed)
         }">
         <div class="overlay"
           @wheel="handleScroll"
@@ -80,6 +81,20 @@ export default {
       const finalPosition = e.pageX + e.pageY
       const difference = finalPosition - this.initialPosition
       if (Math.abs(difference) < 10) this.$emit('chosen', breed)
+    },
+    getBackgroundImage (breed) {
+      if (window.innerWidth < 420) {
+        return 'url(' + require('@/assets/' + breed.mobileImage) + ')'
+      } else {
+        return 'url(' + require('@/assets/' + breed.desktopImage) + ')'
+      }
+    },
+    mobilePosition (breed) {
+      if (window.innerWidth < 420) {
+        return breed.mobilePosition
+      } else {
+        return breed.desktopPosition
+      }
     }
   }
 }
@@ -93,6 +108,7 @@ export default {
 
   .slider-item {
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 
     .overlay {

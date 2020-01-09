@@ -100,16 +100,22 @@ html, body {
 
   .combo {
     position: absolute;
-    bottom: -100px;
+    bottom: -25vw;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
-    height: 200px;
-    width: 200px;
+    height: 50vw;
+    width: 50vw;
+    max-height: 200px;
+    max-width: 200px;
     background-color: #333;
     border-radius: 50%;
     text-align: center;
     cursor: pointer;
+
+    @media (min-width: 400px) {
+      bottom: -100px;
+    }
 
     &:hover {
       background-color: #404040;
