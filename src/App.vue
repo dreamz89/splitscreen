@@ -40,19 +40,19 @@
 </template>
 
 <script>
-import sideScreen from './components/SideScreen.vue'
-import sideDrawer from './components/SideDrawer.vue'
-import fullDrawer from './components/FullDrawer.vue'
-import relation from './data/relation.json'
+import SideScreen from './components/SideScreen.vue'
+import SideDrawer from './components/SideDrawer.vue'
+import FullDrawer from './components/FullDrawer.vue'
 import breeds from './data/breeds.json'
+import mixes from './data/mixes.json'
 
 export default {
   name: 'app',
-  components: { sideScreen, sideDrawer, fullDrawer },
+  components: { SideScreen, SideDrawer, FullDrawer },
   data () {
     return {
       breeds,
-      relation,
+      mixes,
       left: 0,
       right: 1,
       drawerIsOpen: false,
@@ -76,9 +76,10 @@ export default {
       if (this.drawerIsOpen) {
         this.$refs.mixDrawer.$el.classList.remove('slideDown')
       } else {
-        const name1 = this.breeds[this.left].name
-        const name2 = this.breeds[this.right].name
-        this.mixContent = this.relation[name1 + ' ' + name2] || this.relation[name2 + ' ' + name1]
+        const breed1 = this.breeds[this.left].breed
+        const breed2 = this.breeds[this.right].breed
+
+        this.mixContent = this.mixes[breed1 + ' ' + breed2] || this.mixes[breed2 + ' ' + breed1]
         this.$refs.mixDrawer.$el.classList.add('slideDown')
       }
 

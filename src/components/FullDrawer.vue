@@ -1,10 +1,12 @@
 <template>
   <div class="drawer">
     <div class="content">
+      <img :src="'./assets/' + this.drawerContent.mobileImage"/>
+      <h1>{{ drawerContent.name }}</h1>
       <p>{{ drawerContent.description }}</p>
     </div>
     <div class="close" @click="$emit('chosen')">
-      X
+      &times;
     </div>
   </div>
 </template>

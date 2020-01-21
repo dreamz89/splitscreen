@@ -1,0 +1,42 @@
+{
+  "Corgi Corgi": {
+    "name": "Corgi",
+    "mobileImage": "child/corgi.jpg",
+    "description": ""
+  },
+  "Chow Chow Chow Chow": {
+    "name": "Chow Chow",
+    "mobileImage": "child/chow.jpg",
+    "description": ""
+  },
+  "Border Collie Border Collie": {
+    "name": "Border Collie",
+    "mobileImage": "child/collie.jpg",
+    "description": ""
+  },
+  "German Shepherd German Shepherd": {
+    "name": "German Shepherd",
+    "mobileImage": "child/german.jpg",
+    "description": ""
+  },
+  "Golden Retriever Golden Retriever": {
+    "name": "Golden Retriever",
+    "mobileImage": "child/golden.jpg",
+    "description": ""
+  },
+  "Husky Husky": {
+    "name": "Husky",
+    "mobileImage": "child/husky.jpg",
+    "description": ""
+  },
+  "Pomeranian Pomeranian": {
+    "name": "Pomeranian",
+    "mobileImage": "child/pom.jpg",
+    "description": ""
+  },
+  "Poodle Poodle": {
+    "name": "Poodle",
+    "mobileImage": "child/poodle.jpg",
+    "description": ""
+  }
+}

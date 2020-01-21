@@ -84,9 +84,9 @@ export default {
     },
     getBackgroundImage (breed) {
       if (window.innerWidth < 420) {
-        return 'url(' + require('@/assets/' + breed.mobileImage) + ')'
+        return 'url(./assets/' + breed.mobileImage + ')'
       } else {
-        return 'url(' + require('@/assets/' + breed.desktopImage) + ')'
+        return 'url(./assets/' + breed.desktopImage + ')'
       }
     },
     mobilePosition (breed) {
