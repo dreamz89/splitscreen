@@ -43,6 +43,7 @@ export default {
   transition: transform 1s;
 
   .content {
+    max-width: 100%;
     padding: 20px;
 
     h1 {
