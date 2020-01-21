@@ -44,10 +44,12 @@ export default {
     padding: 20px;
 
     h1 {
+      font-family: 'Libre Baskerville', serif;
       color: #333;
     }
 
     p {
+      font-family: 'Open Sans', sans-serif;
       color: #333;
     }
   }
@@ -58,6 +60,7 @@ export default {
     right: 0;
     padding: 20px;
     font-size: 40px;
+    line-height: 0.6em;
     cursor: pointer;
   }
 
